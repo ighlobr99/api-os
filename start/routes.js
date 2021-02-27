@@ -12,11 +12,12 @@ Route.post('complaint', 'ComplaintController.store')
 Route.delete('complaint/:id', 'ComplaintController.delete')
 Route.get('beatch_place', 'BeatchPlaceController.index')
 Route.post('users', 'UserController.store')
+Route.post('sector', 'SectorController.store')
 Route.group(() => {
   Route.get('sector', 'SectorController.index')
   Route.get('sector/:id', 'SectorController.show')
   Route.put('sector/:id', 'SectorController.update')
-  Route.post('sector', 'SectorController.store')
+  
   Route.delete('sector/:id', 'SectorController.delete')
 
   Route.get('users', 'UserController.index')
