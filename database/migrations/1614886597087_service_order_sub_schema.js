@@ -8,6 +8,7 @@ class ServiceOrderSubSchema extends Schema {
     
       
       this.table('service_order_subs', (table) => {
+        table.dropForeign('beatch_place_id')
         table.dropColumn('beatch_place_id')
         table.integer('beatch_place_id')
           .unsigned()
