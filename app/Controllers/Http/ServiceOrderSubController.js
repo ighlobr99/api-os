@@ -89,42 +89,8 @@ class ServiceOrderSubController {
         status: false
       }
       const osSubsStatus = await OsSubStatus.query().where('service_order_sub_id', orderSub.id).first()
-      if (osSubsStatus) {
-        osSubsStatus.merge(objData)
-        await osSubsStatus.save()
-      } else {
-        await OsSubStatus.create(objData)
-      }
-    }
-
-    if (data.result && data.result > 0) {
-      if (data.result >= 400) {
-        const objData = {
-          service_order_sub_id: orderSub.id,
-          status_os_sub: 'improper',
-          status: false
-        }
-        const osSubsStatus = await OsSubStatus.query().where('service_order_sub_id', orderSub.id).first()
-        if (osSubsStatus) {
-          osSubsStatus.merge(objData)
-          await osSubsStatus.save()
-        } else {
-          await OsSubStatus.create(objData)
-        }
-      } else {
-        const orderSubs = await ServiceOrderSub.query()
-          .where('beatch_place_id', data.beatch_place_id)
-          .orderBy('created_at', 'desc')
-          .limit(5)
-          .fetch()
-        const orderSubsJson = orderSubs.toJSON()
-        let i = 1
-        for (const orderSubData of orderSubsJson) {
-          if (orderSubData.result >= 100) {
-            i++;
-          }
-        }
-        if (i >= 2) {
+      if (data.result && data.result > 0) {
+        if (data.result >= 400) {
           const objData = {
             service_order_sub_id: orderSub.id,
             status_os_sub: 'improper',
@@ -138,19 +104,52 @@ class ServiceOrderSubController {
             await OsSubStatus.create(objData)
           }
         } else {
-          const objData = {
-            service_order_sub_id: orderSub.id,
-            status_os_sub: 'proper',
-            status: false
+          const orderSubs = await ServiceOrderSub.query()
+            .where('beatch_place_id', data.beatch_place_id)
+            .orderBy('created_at', 'desc')
+            .limit(5)
+            .fetch()
+          const orderSubsJson = orderSubs.toJSON()
+          let i = 1
+          for (const orderSubData of orderSubsJson) {
+            if (orderSubData.result >= 100) {
+              i++;
+            }
           }
-          const osSubsStatus = await OsSubStatus.query().where('service_order_sub_id', orderSub.id).first()
-          if (osSubsStatus) {
-            osSubsStatus.merge(objData)
-            await osSubsStatus.save()
+          if (i >= 2) {
+            const objData = {
+              service_order_sub_id: orderSub.id,
+              status_os_sub: 'improper',
+              status: false
+            }
+            const osSubsStatus = await OsSubStatus.query().where('service_order_sub_id', orderSub.id).first()
+            if (osSubsStatus) {
+              osSubsStatus.merge(objData)
+              await osSubsStatus.save()
+            } else {
+              await OsSubStatus.create(objData)
+            }
           } else {
-            await OsSubStatus.create(objData)
+            const objData = {
+              service_order_sub_id: orderSub.id,
+              status_os_sub: 'proper',
+              status: false
+            }
+            const osSubsStatus = await OsSubStatus.query().where('service_order_sub_id', orderSub.id).first()
+            if (osSubsStatus) {
+              osSubsStatus.merge(objData)
+              await osSubsStatus.save()
+            } else {
+              await OsSubStatus.create(objData)
+            }
           }
         }
+      }
+      if (osSubsStatus) {
+        osSubsStatus.merge(objData)
+        await osSubsStatus.save()
+      } else {
+        await OsSubStatus.create(objData)
       }
     }
 
