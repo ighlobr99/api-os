@@ -82,6 +82,7 @@ class ServiceOrderSubController {
         } else {
           await OsSubStatus.create(objData)
         }
+        
     } else {
       const objData = {
         service_order_sub_id: orderSub.id,
