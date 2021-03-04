@@ -10,7 +10,7 @@ class ServiceOrderSubSchema extends Schema {
       table.integer('beatch_place_id')
         .unsigned()
         .references('id')
-        .inTable('beatches_places')
+        .inTable('beatche_places')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
         .after('service_order_id')
