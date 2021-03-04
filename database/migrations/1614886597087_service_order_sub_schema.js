@@ -5,8 +5,8 @@ const Schema = use('Schema')
 
 class ServiceOrderSubSchema extends Schema {
   up () {
-    this.table('service_order_subs', (table) => {
-      // alter table
+    
+      
       this.table('service_order_subs', (table) => {
         table.dropColumn('beatch_place_id')
         table.integer('beatch_place_id')
@@ -17,7 +17,6 @@ class ServiceOrderSubSchema extends Schema {
           .onDelete('CASCADE')
           .after('service_order_id')
       })
-    })
   }
 
   down () {
