@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "\\app",
+    "\\app\\Middleware",
+    "\\app\\Models"
   ],
-  "SelectedNode": "\\resources",
   "PreviewInSolutionExplorer": false
 }

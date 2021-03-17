@@ -21,7 +21,7 @@ class UserController {
   async store ({ request, response }) {
     const data = request.only([
       'name',
-      'document',
+      
       'email',
       'password',
       'phone',
@@ -46,7 +46,7 @@ class UserController {
     const user = await User.query().where('id', params.id).firstOrFail()
     const data = request.only([
       'name',
-      'document',
+      
       'email',
       'password',
       'phone',
