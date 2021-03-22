@@ -25,7 +25,7 @@ class UserController {
       'email',
       'password',
       'phone',
-      'birth_date',
+      
       'address',
       'level',
       'sectors_id'
@@ -50,7 +50,7 @@ class UserController {
       'email',
       'password',
       'phone',
-      'birth_date',
+      
       'address',
       'level',
       'area',
